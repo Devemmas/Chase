@@ -31,7 +31,11 @@ const form = document.getElementById("signup-form");
 
 form.addEventListener("submit", function(event) {
     event.preventDefault();
-    
+
+    if (!validateForm()) {
+        return;
+    }
+
     const formData = new FormData(this);
     const formDataObject = {};
     formData.forEach((value, key) => {
@@ -46,7 +50,16 @@ form.addEventListener("submit", function(event) {
 
     // Reset form fields
     this.reset();
+
+    // Display success message
+    var successMessage = document.createElement("p");
+    successMessage.textContent = "Form submitted successfully!";
+    successMessage.classList.add("success-message"); // Add class for styling
+
+    // Append success message to the form
+    this.appendChild(successMessage);
 });
+
 // Form validation
 function validateForm() {
     const name = document.getElementById("name").value;
@@ -66,32 +79,19 @@ function validateForm() {
     return true;
 }
 
-// Add form validation to form submission event listener
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    if (!validateForm()) {
-        return;
-    }
-    
-    const formData = new FormData(this);
-    const formDataObject = {};
-    formData.forEach((value, key) => {
-        formDataObject[key] = value;
-    });
-
-    // Send form data via email
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "mailto:eligibilityresult@gmail.com");
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify(formDataObject));
-
-    // Reset form fields
-    this.reset();
-  // Smooth scrolling effect for event containers
+// Smooth scrolling effect for event containers
 document.querySelectorAll('.event-container').forEach(container => {
     container.addEventListener('click', function() {
         this.scrollIntoView({
             behavior: 'smooth'
         });
+    });
+});
+
+// Add blinking animation to TICKET links
+document.addEventListener('DOMContentLoaded', function() {
+    var ticketLinks = document.querySelectorAll('.event-details a.ticket-button');
+    ticketLinks.forEach(function(link) {
+        link.classList.add('blinking-text');
+    });
 });

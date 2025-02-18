@@ -1,0 +1,12 @@
+.tour-dates__title {
+  margin-top: 0;
+  font-family: var(--font-family-accent);
+  transform: rotate(-3deg);
+}
+
+.tour-dates__heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
